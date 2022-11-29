@@ -5,7 +5,7 @@ const user = {
   bits: 100000,
 };
 
-const simulator = (bet, payout, options) => {
+const simulator = (bet, payout, options, Strategy) => {
   let betAmount = bet;
 
   console.log(betAmount);
@@ -33,7 +33,7 @@ const simulator = (bet, payout, options) => {
       stats.lose++;
     }
   });
-  console.log(Math.min(...gameOverID));
+  console.log(Math.min(...gameOverID), gameOverID.length);
   console.log(user.bits, " %" + stats.percentWin() + " win");
 };
 

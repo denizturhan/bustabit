@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const { data } = require("./data.json");
-
+// TODO Eğer site hata verirse sayfa yenilenmeli
 let id = data[data.length - 1].gameId - 1;
 
 (async () => {
