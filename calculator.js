@@ -1,16 +1,5 @@
 const { data } = require("./data.json");
 
-/* const example = {
-  data: [
-    { busted: 1.01, gameId: 6753941 },
-    { busted: 2.01, gameId: 6753942 },
-    { busted: 3.01, gameId: 6753943 },
-  ],
-};
-for (let i = 0; i < example.data.length; i++) {
-  console.log(example.data[i]);
-} */
-
 const ma = (a) => {
   let total = 0;
   const l = a.length;
@@ -22,7 +11,7 @@ const ma = (a) => {
 };
 
 const bestPayout = (r) => {
-    // payout 1 ile 10 arasında denenecek
+  // payout 1 ile 10 arasında denenecek
 };
 
 module.exports = {

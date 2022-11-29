@@ -1,9 +1,11 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
+const { data } = require("./data.json");
 
-let id = 6752706;
+let id = data[data.length - 1].gameId - 1;
+
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto("https://www.bustabit.com/game/" + id);
   await page.waitForSelector(
@@ -30,28 +32,29 @@ let id = 6752706;
 
         return { busted, gameId };
       });
-      console.log(veri);
+      if (veri) {
+        console.log(veri);
+        fs.readFile("data.json", "utf8", (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            const obj = JSON.parse(data);
+            obj.data.push(veri);
+            fs.writeFile("data.json", JSON.stringify(obj), (err) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("Datsa written to file");
+              }
+            });
+          }
+        });
+        await page.click(
+          "body > div > div > div > div > div > nav > a:nth-child(1)"
+        );
 
-      fs.readFile("data.json", "utf8", (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          const obj = JSON.parse(data);
-          obj.data.push(veri);
-          fs.writeFile("data.json", JSON.stringify(obj), (err) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("Datsa written to file");
-            }
-          });
-        }
-      });
-      await page.click(
-        "body > div > div > div > div > div > nav > a:nth-child(1)"
-      );
-
-      await page.waitForNetworkIdle();
+        await page.waitForNetworkIdle();
+      }
     } catch (error) {
       console.log(error);
     }
